@@ -32,7 +32,7 @@ class MyClient(discord.Client):
         
         if message.author == self.user:
             return
-        if message.channel != os.environ['TRADE_CHANNEL']:
+        if message.channel.id != os.environ['TRADE_CHANNEL']:
             return
         
         prefex = message.content.split(' ')[0]
