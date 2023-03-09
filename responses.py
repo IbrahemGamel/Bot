@@ -1,6 +1,6 @@
 from db import User, Trade
 import discord
-import json
+import json, os
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import create_engine
 from datetime import datetime, timedelta
@@ -187,11 +187,9 @@ async def vouch(self, message: discord.message):
 
   with open('config.json') as f:
     data = json.load(f)
-    mode_verify_channel = data['mod_verify_channel']
-    verified_trades_channel = self.client.get_channel(
-      data['verified_trades_channel'])
-    denied_trades_channel = self.client.get_channel(
-      data['denied_trades_channel'])
+    mode_verify_channel = os.environ['MOD_VERIFY_CHANNEL']
+    verified_trades_channel = self.client.get_channel(os.environ['VERIFIED_TRADES_CHANNEL'])
+    denied_trades_channel = self.client.get_channel(os.environ['DENIED_TRADES_CHANNEL'])
 
   mod_channel = self.client.get_channel(mode_verify_channel)
 

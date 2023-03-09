@@ -1,6 +1,6 @@
 import discord
 from responses import vouch, init, sync_me, total_trades, add_mods, remove_mods, set_trades
-import asyncio, random
+import asyncio, random, os
 
 
 
@@ -31,6 +31,8 @@ class MyClient(discord.Client):
     async def on_message(self, message):
         
         if message.author == self.user:
+            return
+        if message.channel != os.environ['TRADE_CHANNEL']:
             return
         
         prefex = message.content.split(' ')[0]
