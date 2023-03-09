@@ -185,13 +185,9 @@ async def vouch(self, message: discord.message):
 
   # Creating the trade / Sending to Mod Chat
 
-  with open('config.json') as f:
-    data = json.load(f)
-    mode_verify_channel = os.environ['MOD_VERIFY_CHANNEL']
-    verified_trades_channel = self.client.get_channel(os.environ['VERIFIED_TRADES_CHANNEL'])
-    denied_trades_channel = self.client.get_channel(os.environ['DENIED_TRADES_CHANNEL'])
-
-  mod_channel = self.client.get_channel(mode_verify_channel)
+  mod_channel = self.client.get_channel(os.environ['MOD_VERIFY_CHANNEL'])
+  verified_trades_channel = self.client.get_channel(os.environ['VERIFIED_TRADES_CHANNEL'])
+  denied_trades_channel = self.client.get_channel(os.environ['DENIED_TRADES_CHANNEL'])
 
   embed = discord.Embed(
     title=f"Trade Between {message.author} and {message.mentions[0]}",
