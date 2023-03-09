@@ -1,26 +1,19 @@
-# This example requires the 'message_content' privileged intents
-
-import os
+from bot import MyClient
 import discord
-from discord.ext import commands
+import os
+from flask import Flask
+
+app = Flask(__name__)
 
 
-intents = discord.Intents.default()
-intents.message_content = True
-bot = commands.Bot(command_prefix='!', intents=intents)
+@app.route('/')
+def index():
+  return "Bot up and running"
 
 
-@bot.event
-async def on_ready():
-    print(f"Logged in as {bot.user}")
-
-@bot.command()
-async def ping(ctx):
-    await ctx.send('pong')
-
-@bot.command()
-async def hello(ctx):
-    await ctx.send("Choo choo! 🚅")
-
-
-bot.run(os.environ["DISCORD_TOKEN"])
+if __name__ == '__main__':
+  my_secret = os.environ['token']
+  TOKEN = my_secret
+  bot = MyClient
+  bot.run_bot(discord.Client, TOKEN)
+  # app.run(host='0.0.0.0', port='9082')
